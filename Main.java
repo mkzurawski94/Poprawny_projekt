@@ -3,6 +3,8 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        Animal szarik = new Animal("dog");
+        szarik.name = "szarik";
+        System.out.println(szarik);
     }
 }
