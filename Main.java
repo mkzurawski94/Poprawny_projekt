@@ -6,12 +6,16 @@ import com.company.devices.Phone;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Human me = new Human("Nowak", "jan");
-        Car fura = new Car("e46", "bmw", 1994);
-        Phone phone1 = new Phone("s10", "samsung", 2019);
+        Human me = new Human("nowak", "jan");
+        Human wife = new Human("Nowak", "Ewa");
+        Human brotherInLaw = new Human("Szwagier", " zbychu");
+        me.cash = 100.0;
+        wife.cash = 1000.0;
+        brotherInLaw.cash = 1000.0;
 
-        fura.turnOn();
-        phone1.turnOn();
+        Animal frytek = new Animal("dog", me);
+        frytek.sell(wife, brotherInLaw, 100.0);
+
 
     }
 }

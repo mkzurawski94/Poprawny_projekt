@@ -5,18 +5,21 @@ import com.company.devices.Phone;
 
 import java.time.LocalDateTime;
 
-public class Human {
+public class Human extends Animal {
     String lastName;
-    String name;
+    public String name;
     Double weight;
     Animal animal;
     Phone phone;
+    public Double cash;
     private Car car;
     private Double salary;
 
 
+
     public Human(String lastName,
                  String name) {
+        super("homo sapiens");
         this.lastName = lastName;
         this.name = name;
     }
@@ -66,7 +69,21 @@ public class Human {
 
     }
 
+    public double getCash() {
+
+        return cash;
+    }
+
+    public void setCash(double cash) {
+        this.cash = cash;
+        System.out.println("Cash: " + name + " " + cash);
+    }
+
     public Car getCar() {
         return car;
+    }
+
+    public void sell() throws Exception {
+        throw new Exception("Cant sell human dude");
     }
 }

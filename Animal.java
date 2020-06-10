@@ -2,16 +2,41 @@ package com.company;
 
 import java.io.File;
 
-public class Animal {
+public class Animal implements SaleAble {
     final String species;
     File pic;
     private Double weight;
     String name;
+    Human owner;
+    Human lastOwner;
     public static final Double DEFAULT_DOG_WEIGHT = 5.0;
     public static final Double DEFAULT_MOUSE_WEIGHT = 1.0;
     public static final Double DEFAULT_LION_WEIGHT = 50.0;
+    public static final Double DEFAULT_HUMAN_WEIGHT = 70.0;
 
     Animal(String species) {
+        if (species == "dog") {
+            weight = DEFAULT_DOG_WEIGHT;
+        } else {
+            if (species == "mouse") {
+                weight = DEFAULT_MOUSE_WEIGHT;
+            } else {
+                if (species == "lion") {
+                    weight = DEFAULT_LION_WEIGHT;
+                } else {
+                    if (species == "homo sapiens") {
+                        weight = DEFAULT_HUMAN_WEIGHT;
+                    } else {
+                        System.out.println("Wrong species");
+                    }
+                }
+            }
+
+        }
+        this.species = species;
+    }
+
+    Animal(String species, Human owner) {
         if (species == "dog") {
             weight = DEFAULT_DOG_WEIGHT;
         } else {
@@ -26,6 +51,8 @@ public class Animal {
             }
         }
         this.species = species;
+        this.owner = owner;
+        owner.animal = this;
     }
 
     @Override
@@ -71,5 +98,24 @@ public class Animal {
         }
     }
 
-
+    @Override
+    public void sell(Human buyer, Human seller, Double price) throws Exception {
+        if (seller.animal == null) {//sprawdza czy sprzedawca ma zwierze
+            throw new Exception("Dont have a animal");
+        } else {
+            if (this instanceof Human) {//sprawdza czy zwierze nie jest człowiekiem
+                throw new Exception("no way");
+            } else if (buyer.cash < price) {
+                throw new Exception("not enough money");
+            } else {
+                this.lastOwner = seller;//ustawia poprzedniego własciciela
+                this.owner = buyer;//ustawia nowego własiciela
+                buyer.cash -= price;
+                seller.cash += price;
+                seller.animal = null;
+                buyer.animal = this;
+                System.out.println(owner.name + " bought " + species + " from " + this.lastOwner.name + " for " + price);
+            }
+        }
+    }
 }
