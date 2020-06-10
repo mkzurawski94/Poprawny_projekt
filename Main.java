@@ -1,19 +1,17 @@
 package com.company;
 
 import com.company.devices.Car;
+import com.company.devices.Phone;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
         Human me = new Human("Nowak", "jan");
-        Car fura = new Car("126p", "Fiat", "blue");
-        Car fura3 = new Car("126p", "Fiat", "blue");
-        Car fura2 = new Car("e46", "bmw", " blue");
+        Car fura = new Car("e46", "bmw", 1994);
+        Phone phone1 = new Phone("s10", "samsung", 2019);
 
-        if (fura.equals(fura3)) {
-            System.out.println("równe");
-        } else System.out.println("nie rowne");
-
+        fura.turnOn();
+        phone1.turnOn();
 
     }
 }

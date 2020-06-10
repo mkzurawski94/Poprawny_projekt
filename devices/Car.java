@@ -2,18 +2,19 @@ package com.company.devices;
 
 import java.util.Objects;
 
-public class Car {
-    public final String model;
-    public final String producer;
+public class Car extends Device {
+
     String colour;
     Double engineCapacity;
-
     public Double value;
 
-    public Car(String model, String producer, String colour) {
-        this.model = model;
-        this.producer = producer;
+    public Car(String model, String producer, String colour, int yearOfProduction) {
+        super(model, producer, yearOfProduction);
         this.colour = colour;
+    }
+
+    public Car(String model, String producer, int yearOfProduction) {
+        super(model, producer, yearOfProduction);
     }
 
     @Override
@@ -42,5 +43,11 @@ public class Car {
     @Override
     public int hashCode() {
         return Objects.hash(model, producer, colour, engineCapacity, value);
+    }
+
+    @Override
+    public void turnOn() {
+        super.turnOn();
+        System.out.println("wrrrrrrr");
     }
 }
