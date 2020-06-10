@@ -6,5 +6,7 @@ public class Main {
         Animal szarik = new Animal("dog");
         szarik.name = "szarik";
         System.out.println(szarik);
+        szarik.takeForWalk();
+        szarik.feed();
     }
 }
