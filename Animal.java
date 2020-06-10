@@ -38,7 +38,7 @@ public class Animal {
                 '}';
     }
 
-    void feed() {
+    void feed() {//karmienie zwierzecia , wzrost masy o 1kg
 
         if (weight <= 0) {
             System.out.println("cant feed dead animal");
@@ -50,7 +50,7 @@ public class Animal {
 
     }
 
-    void feed(Double food) {
+    void feed(Double food) {   //przeciazona metoda pozwala wybrac ilosc danego jedzenia
         if (weight <= 0) {
             System.out.println("cant feed dead animal");
         } else if (weight > 0) {
@@ -60,7 +60,7 @@ public class Animal {
         }
     }
 
-    void takeForWalk() {
+    void takeForWalk() {//wyjsice na spacer ze zwierzęciem, spadek wagi o 1kg
         if (weight <= 0) {
             System.out.println("you walk with your dead " + name + "  on your hand");
             System.out.println("people think you're crazy");

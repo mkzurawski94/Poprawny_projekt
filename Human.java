@@ -6,6 +6,7 @@ public class Human {
     Double weight;
     Animal animal;
     Phone phone;
+    Car car;
 
     public Human(String lastName,
                  String name) {
