@@ -8,7 +8,7 @@ public class Human {
     Double weight;
     Animal animal;
     Phone phone;
-    Car car;
+    private Car car;
     private Double salary;
 
 
@@ -50,4 +50,20 @@ public class Human {
         }
     }
 
+    public void setCar(Car car) throws Exception {//zwróci wyjatek ze nie mozna kupic auta
+        if (salary > car.value) {
+            System.out.println("You can buy this car");
+        } else if (salary < car.value / 12) {//warunek1
+            throw new Exception("Cant buy this car even with credit");
+        } else {
+            System.out.println("You can buy this car with credit");
+
+        }
+        this.car = car;
+
+    }
+
+    public Car getCar() {
+        return car;
+    }
 }

@@ -6,6 +6,7 @@ public class Car {
     String colour;
     Double engineCapacity;
     String DEFAULT_COLOUR;
+    Double value;
 
     Car(String model, String producer, String colour) {
         this.model = model;
