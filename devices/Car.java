@@ -4,11 +4,12 @@ import com.company.creatures.Human;
 
 import java.util.Objects;
 
-public class Car extends Device {
+public abstract class Car extends Device {
 
     String colour;
     Double engineCapacity;
     public Double value;
+    public Double fuelTank = 0.0;
 
     public Car(String model, String producer, String colour, int yearOfProduction) {
         super(model, producer, yearOfProduction);
@@ -70,4 +71,9 @@ public class Car extends Device {
         }
 
     }
+
+    public abstract void refuel();
+
+    public abstract void refuel(Double tank);
+
 }

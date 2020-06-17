@@ -2,10 +2,15 @@ package com.company.devices;
 
 import com.company.creatures.Human;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Arrays;
+
 public class Phone extends Device {
+    public static final String DEFAULT_APP_PROTOCOL = "https";
+    public static final String DEFAULT_APP_SERVER = "dobreprogramy.com";
 
     Double size;
-
 
     public Phone(String model, String producer, int yearOfProduction, Double size) {
         super(model, producer, yearOfProduction);
@@ -46,5 +51,38 @@ public class Phone extends Device {
             buyer.phone = this;
             System.out.println(owner.name + " bought " + model + " from " + this.lastOwner.name + " for " + price);
         }
+    }
+
+    public void instalAnApp(String appName) {
+        System.out.println(appName + " intallation complete");
+    }
+
+    public void installAnApp(String appName, String appVersion, String serverAdress) {
+        System.out.println(appName + " ver." + appVersion + " from " + serverAdress + " installation completed");
+    }
+
+    public void installAnApp(String list) {
+        String[] tab = new String[10];
+        tab[0] = "Apka1";
+        tab[1] = "Apka2";
+        tab[2] = "Apka3";
+        tab[3] = "Apka4";
+        tab[4] = "Apka5";
+        tab[5] = "Apka6";
+        tab[6] = "Apka7";
+        tab[7] = "Apka8";
+        tab[8] = "Apka9";
+        tab[9] = "Apka10";
+        System.out.println(Arrays.toString(tab));
+
+    }
+
+    public void installAnApp(String appName, String appVersion) throws MalformedURLException {
+        URL url = new URL(DEFAULT_APP_PROTOCOL, DEFAULT_APP_SERVER, appName + "-" + appVersion);
+        this.installAnApp(url);
+    }
+
+    public void installAnApp(URL url) {
+        System.out.println("intallation completed " + url.getFile() + " from  " + url.getHost());
     }
 }
