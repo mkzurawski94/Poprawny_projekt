@@ -1,9 +1,15 @@
 package com.company.devices;
 
-public abstract class Device {
+import com.company.SaleAble;
+import com.company.creatures.Human;
+import jdk.jfr.Experimental;
+
+public abstract class Device implements SaleAble {
     public final String model;
     public final String producer;
     public final int yearOfProduction;
+    Human owner;
+    Human lastOwner;
 
     public Device(String model, String producer, int yearOfProduction) {
         this.model = model;
@@ -25,4 +31,7 @@ public abstract class Device {
     public void turnOn() {
         System.out.println("device is on");
     }
+
+
 }
+

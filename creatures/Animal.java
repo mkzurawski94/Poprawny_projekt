@@ -1,20 +1,24 @@
-package com.company;
+package com.company.creatures;
+
+import com.company.SaleAble;
 
 import java.io.File;
 
-public class Animal implements SaleAble {
+public abstract class Animal implements SaleAble, Edible {
     final String species;
     File pic;
     private Double weight;
     String name;
     Human owner;
     Human lastOwner;
+    public String isAlive;
+    public static final String DEFAULT_ANIMAL_ISALIVE = "yes";
     public static final Double DEFAULT_DOG_WEIGHT = 5.0;
     public static final Double DEFAULT_MOUSE_WEIGHT = 1.0;
     public static final Double DEFAULT_LION_WEIGHT = 50.0;
-    public static final Double DEFAULT_HUMAN_WEIGHT = 70.0;
+    public static final Double DEFAULT_COW_WEIGHT = 120.0;
 
-    Animal(String species) {
+    public Animal(String species) {
         if (species == "dog") {
             weight = DEFAULT_DOG_WEIGHT;
         } else {
@@ -24,19 +28,25 @@ public class Animal implements SaleAble {
                 if (species == "lion") {
                     weight = DEFAULT_LION_WEIGHT;
                 } else {
-                    if (species == "homo sapiens") {
-                        weight = DEFAULT_HUMAN_WEIGHT;
+                    if (species == "cow") {
+                        weight = DEFAULT_COW_WEIGHT;
                     } else {
-                        System.out.println("Wrong species");
+                        if (species == "homo sapiens") {
+
+                        } else {
+                            System.out.println("Wrong species");
+                        }
                     }
                 }
+
             }
 
         }
         this.species = species;
+        this.isAlive = DEFAULT_ANIMAL_ISALIVE;
     }
 
-    Animal(String species, Human owner) {
+    public Animal(String species, Human owner) {
         if (species == "dog") {
             weight = DEFAULT_DOG_WEIGHT;
         } else {
@@ -46,13 +56,18 @@ public class Animal implements SaleAble {
                 if (species == "lion") {
                     weight = DEFAULT_LION_WEIGHT;
                 } else {
-                    System.out.println("Wrong species");
+                    if (species == "cow") {
+                        weight = DEFAULT_COW_WEIGHT;
+                    } else {
+                        System.out.println("Wrong species");
+                    }
                 }
             }
         }
         this.species = species;
         this.owner = owner;
         owner.animal = this;
+        this.isAlive = DEFAULT_ANIMAL_ISALIVE;
     }
 
     @Override
@@ -65,25 +80,25 @@ public class Animal implements SaleAble {
                 '}';
     }
 
-    void feed() {//karmienie zwierzecia , wzrost masy o 1kg
+    public void feed() {//karmienie zwierzecia , wzrost masy o 1kg
 
         if (weight <= 0) {
             System.out.println("cant feed dead animal");
         } else if (weight > 0) {
             weight++;
             System.out.println("omnomnom");
-            System.out.println(name + " weight is: " + weight);
+            System.out.println(this.getSpecies() + " weight is: " + weight);
         }
 
     }
 
-    void feed(Double food) {   //przeciazona metoda pozwala wybrac ilosc danego jedzenia
+    public void feed(Double foodWeight) {   //przeciazona metoda pozwala wybrac ilosc danego jedzenia
         if (weight <= 0) {
             System.out.println("cant feed dead animal");
         } else if (weight > 0) {
-            weight = weight + food;
+            weight = weight + foodWeight;
             System.out.println("omnomnom");
-            System.out.println(name + " weight is: " + weight);
+            System.out.println(this.getSpecies() + " weight is: " + weight);
         }
     }
 
@@ -118,4 +133,18 @@ public class Animal implements SaleAble {
             }
         }
     }
+
+
+    public String getSpecies() {
+        return species;
+    }
+
+    @Override
+    public void beEaten(Animal eater) throws Exception {
+        this.isAlive = "no";
+        eater.feed();
+        System.out.println(eater.species + " ate " + this.species);
+    }
+
+
 }
