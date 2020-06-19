@@ -4,7 +4,10 @@ import com.company.creatures.Animal;
 import com.company.devices.Car;
 import com.company.devices.Phone;
 
+import java.sql.Array;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Human extends Animal {
     public String lastName;
@@ -13,9 +16,11 @@ public class Human extends Animal {
     public Animal animal;
     public Phone phone;
     public Double cash;
-    private Car car;
-    private Double salary;
+    public Car[] garage;
+    //    private Car car;
+    private Double salary = 200.0;
     public static final Double DEFAULT_HUMAN_WEIGHT = 70.0;
+    public static final Integer DEFAULT_GARAGE_SIZE = 3;
 
     public Human(String lastName,
                  String name) {
@@ -23,7 +28,18 @@ public class Human extends Animal {
         this.lastName = lastName;
         this.name = name;
         this.weight = DEFAULT_HUMAN_WEIGHT;
+        this.garage = new Car[DEFAULT_GARAGE_SIZE];
     }
+
+    public Human(String lastName,
+                 String name, Integer garageSize) {
+        super("homo sapiens");
+        this.lastName = lastName;
+        this.name = name;
+        this.weight = DEFAULT_HUMAN_WEIGHT;
+        this.garage = new Car[garageSize];
+    }
+
 
     @Override
     public String toString() {
@@ -33,11 +49,11 @@ public class Human extends Animal {
                 ", weight=" + weight +
                 ", animal=" + animal +
                 ", phone=" + phone +
-                ", car=" + car +
+                ", cash=" + cash +
+                ", garage=" + Arrays.toString(garage) +
                 ", salary=" + salary +
                 '}';
     }
-
 
     public Double getSalary() {
         LocalDateTime myObj = LocalDateTime.now();
@@ -45,7 +61,7 @@ public class Human extends Animal {
         return salary;
     }
 
-    void setSalary(Double salary) throws Exception {//wyjątek ujemnego wynagrodzenia
+    public void setSalary(Double salary) throws Exception {//wyjątek ujemnego wynagrodzenia
         if (salary <= 0.0) {
             throw new Exception("Are you slayer master???");
         } else {
@@ -57,17 +73,16 @@ public class Human extends Animal {
         }
     }
 
-    public void setCar(Car car) throws Exception {//zwróci wyjatek ze nie mozna kupic auta
-//        if (salary > car.value) {
+    public void setCar(Car car, int numberInGarage) throws Exception {//zwróci wyjatek ze nie mozna kupic auta
+        if (salary > car.value) {
 //            System.out.println("You can buy this car");
-//        } else if (salary < car.value / 12) {//warunek1
-//            throw new Exception("Cant buy this car even with credit");
-//        } else {
+        } else if (salary < car.value / 12) {//warunek1
+            throw new Exception("Cant buy this car even with credit");
+        } else {
 //            System.out.println("You can buy this car with credit");
-//
-//        }
-        this.car = car;
 
+        }
+        this.garage[numberInGarage] = car;
     }
 
     public double getCash() {
@@ -80,11 +95,17 @@ public class Human extends Animal {
         System.out.println("Cash: " + name + " " + cash);
     }
 
-    public Car getCar() {
-        return car;
+    public Car getCar(int numberInGarage) {
+        return garage[numberInGarage];
     }
 
-    public void sell() throws Exception {
+    @Override
+    public void sell(Human buyer, Human seller) throws Exception {
+        throw new Exception("Cant sell human dude");
+    }
+
+    @Override
+    public void sell(Human buyer, Human seller, Double price) throws Exception {
         throw new Exception("Cant sell human dude");
     }
 
@@ -103,4 +124,48 @@ public class Human extends Animal {
             System.out.println(this.name + " weight is: " + weight);
         }
     }
+
+    public void showGarage() {
+        System.out.println("garage lenght is: " + garage.length);
+        for (int i = 0; i < garage.length; i++) {
+            System.out.println(i + " garage place : " + garage[i]);
+        }
+    }
+
+    public Double showValueOfGarage() {
+        double sum = 0;
+        for (int i = 0; i < garage.length; i++) {
+            sum += garage[i].value;
+        }
+        return sum;
+    }
+
+    public void garageSortByYear() {
+        Arrays.sort(garage, Comparator.comparing(Car::getYearOfProduction));
+    }
+
+    public int isEmptyAnySlot() {
+        int a = 0;
+        for (int i = 0; i < garage.length; i++) {
+            if (garage[i] == null) {
+                a = i;
+                return i;
+            }
+        }
+        return garage.length;
+
+    }
+
+    public Integer numberFromGarage(Car[] garage, Car car) {
+        int a = 0;
+        for (int i = 0; i < garage.length; i++) {
+            if (this.garage[i] == car) {
+                a = i;
+                break;
+            }
+
+        }
+        return a;
+    }
+
 }

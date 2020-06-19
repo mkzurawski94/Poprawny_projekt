@@ -2,13 +2,14 @@ package com.company.devices;
 
 import com.company.creatures.Human;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class Car extends Device {
 
     String colour;
     Double engineCapacity;
-    public Double value;
     public Double fuelTank = 0.0;
 
     public Car(String model, String producer, String colour, int yearOfProduction) {
@@ -28,6 +29,7 @@ public abstract class Car extends Device {
                 ", colour='" + colour + '\'' +
                 ", engineCapacity=" + engineCapacity +
                 ", value=" + value +
+                ", yearOfProduction=" + yearOfProduction +
                 '}';
     }
 
@@ -54,20 +56,29 @@ public abstract class Car extends Device {
         System.out.println("wrrrrrrr");
     }
 
+
     @Override
-    public void sell(Human buyer, Human seller, Double price) throws Exception {
-        if (seller.getCar() == null) {
-            throw new Exception("Seller dont have this thing");
-        } else if (buyer.cash < price) {
-            throw new Exception("Not enough money");
+    public void sell(Human buyer, Human seller) throws Exception {
+        boolean result = Arrays.stream(seller.garage).anyMatch(this::equals);
+//        System.out.println(result);
+        if (result) {
+            if (buyer.cash > this.value) {
+                if (buyer.isEmptyAnySlot() != buyer.garage.length) {
+                    this.lastOwner = seller;//ustawia poprzedniego własciciela
+                    this.owner = buyer;//ustawia nowego własiciela
+                    buyer.garage[buyer.isEmptyAnySlot()] = this; //wrzuca nowe auto na wolny slot
+                    seller.garage[seller.numberFromGarage(seller.garage, this)] = null;//
+                    buyer.cash -= this.value;
+                    seller.cash += this.value;
+                    System.out.println(owner.name + " bought " + model + " from " + this.lastOwner.name + " for " + this.value);
+                } else {
+                    throw new Exception("Byer dont have any free slot for a car");
+                }
+            } else {
+                throw new Exception("not enough money");
+            }
         } else {
-            this.lastOwner = seller;//ustawia poprzedniego własciciela
-            this.owner = buyer;//ustawia nowego własiciela
-            buyer.cash -= price;
-            seller.cash += price;
-            seller.setCar(null);
-            buyer.setCar(this);
-            System.out.println(owner.name + " bought " + model + " from " + this.lastOwner.name + " for " + price);
+            throw new Exception("Seller dont have this thing");
         }
 
     }
@@ -75,5 +86,6 @@ public abstract class Car extends Device {
     public abstract void refuel();
 
     public abstract void refuel(Double tank);
+
 
 }

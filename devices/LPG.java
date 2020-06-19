@@ -1,5 +1,7 @@
 package com.company.devices;
 
+import com.company.creatures.Human;
+
 public class LPG extends Car {
     public LPG(String model, String producer, String colour, int yearOfProduction) {
         super(model, producer, colour, yearOfProduction);
@@ -15,5 +17,15 @@ public class LPG extends Car {
     public void refuel(Double tank) {
         fuelTank += tank;
         System.out.println("refuel lpg " + tank);
+    }
+
+    @Override
+    public void sell(Human buyer, Human seller) throws Exception {
+        super.sell(buyer, seller);
+    }
+
+    @Override
+    public void sell(Human buyer, Human seller, Double price) throws Exception {
+
     }
 }

@@ -12,4 +12,9 @@ public class FarmAnimal extends Animal implements Edible {
     public void beEaten(Animal eater) throws Exception {
         super.beEaten(eater);
     }
+
+    @Override
+    public void sell(Human buyer, Human seller) throws Exception {
+
+    }
 }

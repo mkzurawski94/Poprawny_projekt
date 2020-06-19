@@ -4,10 +4,13 @@ import com.company.SaleAble;
 import com.company.creatures.Human;
 import jdk.jfr.Experimental;
 
+import java.util.Arrays;
+
 public abstract class Device implements SaleAble {
     public final String model;
     public final String producer;
     public final int yearOfProduction;
+    public Double value;
     Human owner;
     Human lastOwner;
 
@@ -32,6 +35,8 @@ public abstract class Device implements SaleAble {
         System.out.println("device is on");
     }
 
-
+    public int getYearOfProduction() {
+        return yearOfProduction;
+    }
 }
 

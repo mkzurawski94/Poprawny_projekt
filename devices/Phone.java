@@ -38,7 +38,7 @@ public class Phone extends Device {
 
     @Override
     public void sell(Human buyer, Human seller, Double price) throws Exception {
-        if (seller.getCar() == null) {
+        if (seller.phone == null) {
             throw new Exception("Seller dont have this thing");
         } else if (buyer.cash < price) {
             throw new Exception("Not enough money");
@@ -51,6 +51,12 @@ public class Phone extends Device {
             buyer.phone = this;
             System.out.println(owner.name + " bought " + model + " from " + this.lastOwner.name + " for " + price);
         }
+
+    }
+
+    @Override
+    public void sell(Human buyer, Human seller) throws Exception {
+
     }
 
     public void instalAnApp(String appName) {
