@@ -2,6 +2,9 @@ package com.company;
 
 
 import com.company.creatures.Human;
+import com.company.devices.Device;
+
+import java.util.Date;
 
 public interface SaleAble {
 

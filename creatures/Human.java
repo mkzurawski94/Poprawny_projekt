@@ -2,6 +2,7 @@ package com.company.creatures;
 
 import com.company.creatures.Animal;
 import com.company.devices.Car;
+import com.company.devices.Device;
 import com.company.devices.Phone;
 
 import java.sql.Array;
@@ -46,12 +47,6 @@ public class Human extends Animal {
         return "Human{" +
                 "lastName='" + lastName + '\'' +
                 ", name='" + name + '\'' +
-                ", weight=" + weight +
-                ", animal=" + animal +
-                ", phone=" + phone +
-                ", cash=" + cash +
-                ", garage=" + Arrays.toString(garage) +
-                ", salary=" + salary +
                 '}';
     }
 
@@ -83,6 +78,9 @@ public class Human extends Animal {
 
         }
         this.garage[numberInGarage] = car;
+        car.ownerList.add(this);
+
+
     }
 
     public double getCash() {
@@ -108,6 +106,7 @@ public class Human extends Animal {
     public void sell(Human buyer, Human seller, Double price) throws Exception {
         throw new Exception("Cant sell human dude");
     }
+
 
     @Override
     public void beEaten(Animal eater) throws Exception {

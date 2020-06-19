@@ -2,17 +2,19 @@ package com.company.devices;
 
 import com.company.SaleAble;
 import com.company.creatures.Human;
-import jdk.jfr.Experimental;
 
-import java.util.Arrays;
+import java.util.*;
 
 public abstract class Device implements SaleAble {
     public final String model;
     public final String producer;
     public final int yearOfProduction;
     public Double value;
-    Human owner;
-    Human lastOwner;
+    public Human owner;
+    public Human lastOwner;
+    public List<Human> ownerList = new ArrayList<>();
+    public List<Date> transactionsList = new ArrayList<>();
+    public List<Double> priceList = new ArrayList<>();
 
     public Device(String model, String producer, int yearOfProduction) {
         this.model = model;
@@ -38,5 +40,6 @@ public abstract class Device implements SaleAble {
     public int getYearOfProduction() {
         return yearOfProduction;
     }
+
 }
 
