@@ -121,7 +121,7 @@ public abstract class Car extends Device {
 
     //metoda liczy transakcje dotyczace jednego auta
     public Integer howManyTransactions() {
-        int i = ownerList.size();
+        int i = ownerList.size() - 1;
         return i;
     }
 
