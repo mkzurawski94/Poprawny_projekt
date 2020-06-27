@@ -23,6 +23,13 @@ public abstract class Device implements SaleAble {
 
     }
 
+    public Device(String model, String producer, int yearOfProduction, Human owner) {
+        this.model = model;
+        this.producer = producer;
+        this.yearOfProduction = yearOfProduction;
+        this.owner = owner;
+    }
+
 
     @Override
     public String toString() {
